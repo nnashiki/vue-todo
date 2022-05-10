@@ -5,9 +5,9 @@
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="name"
-            :counter="10"
+            :counter="20"
             :rules="nameRules"
-            label="タスク名"
+            label="用語名"
             required
           ></v-text-field>
 
@@ -17,16 +17,13 @@
             class="mr-4"
             @click="addTask"
           >
-            タスク 追加
+            用語 追加
           </v-btn>
         </v-form>
       </v-col>
       <v-col class="mb-5" cols="12">
         <div v-for="(checkbox, i) in checkboxes" :key="i">
-          <v-checkbox
-            v-model="checkbox.status"
-            :label="checkbox.lavel"
-          ></v-checkbox>
+          <v-card-title v-text="checkbox.lavel"></v-card-title>
         </div>
       </v-col>
     </v-row>
@@ -42,11 +39,9 @@ export default Vue.extend({
   data: () => ({
     checkboxes: [
       {
-        status: true,
         lavel: "お買い物",
       },
       {
-        status: false,
         lavel: "ゴミ捨て",
       },
     ],
@@ -61,7 +56,7 @@ export default Vue.extend({
 
   methods: {
     addTask() {
-      this.checkboxes.push({ status: false, lavel: this.name });
+      this.checkboxes.push({lavel: this.name });
       (this.$refs as any).form.reset();
     },
   },
